@@ -1,0 +1,19 @@
+.winner-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(29, 14, 44, 0.8);
+  margin: 200px auto;
+}
+.winner {
+  padding: 2px;
+  max-width: 50%;
+  margin: 50px auto;
+}
+.winner-backdrop img {
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+}

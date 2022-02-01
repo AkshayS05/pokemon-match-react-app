@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import SingleCard from "./components/SingleCard";
+import Winner from "./components/Winner";
 const cardImages = [
   {
     src: "/img/helmet-1.png",
@@ -33,15 +34,20 @@ function App() {
   const [choiceOne, setChoiceOne] = useState(null);
   const [choiceTwo, setChoiceTwo] = useState(null);
   const [disable, setDisable] = useState(false);
+  const [winner, setWinner] = useState(false);
+  // const [winner, setWinner] = useState(false);
   //duplicate each card ones
   //shuffle cards
   const shuffleCards = () => {
     const doubleCards = [...cardImages, ...cardImages]
       .sort(() => Math.random() - 0.5)
       .map((card) => ({ ...card, id: Math.random() }));
+    setChoiceOne(null);
+    setChoiceTwo(null);
     setCards(doubleCards);
     setTurns(0);
   };
+
   const handleClick = (card) => {
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card);
   };
@@ -64,7 +70,6 @@ function App() {
       }
     }
   }, [choiceOne, choiceTwo]);
-  console.log(cards);
 
   const resetTurn = () => {
     setChoiceOne(null);
@@ -73,7 +78,10 @@ function App() {
     setDisable(false);
   };
   //start the game automatically
-  useEffect(() => {}, []);
+  useEffect(() => {
+    shuffleCards();
+  }, []);
+
   return (
     <div className="App">
       <h1>Magic Match</h1>
@@ -90,6 +98,9 @@ function App() {
         ))}
       </div>
       <h2>Turns Taken: {turns}</h2>
+      {cards.every((card) => card.matched === true) && (
+        <Winner turns={turns} shuffleCards={shuffleCards} />
+      )}
     </div>
   );
 }
