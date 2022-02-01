@@ -72,7 +72,8 @@ function App() {
     setTurns((prevTurns) => prevTurns + 1);
     setDisable(false);
   };
-
+  //start the game automatically
+  useEffect(() => {}, []);
   return (
     <div className="App">
       <h1>Magic Match</h1>
@@ -88,6 +89,7 @@ function App() {
           />
         ))}
       </div>
+      <h2>Turns Taken: {turns}</h2>
     </div>
   );
 }

@@ -2,7 +2,7 @@ import "./SingleCard.css";
 
 export default function SingleCard({ card, handleClick, flipped, disable }) {
   const handleChoice = () => {
-    if (!disable) {
+    if (!disable && !flipped) {
       handleClick(card);
     }
   };
